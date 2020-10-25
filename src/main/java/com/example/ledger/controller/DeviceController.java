@@ -36,18 +36,36 @@ public class DeviceController {
  	    
 		@Autowired 
 	    private LedgerService ledgerService;
+		private static final String uri_getAll = "/getAll";
+		private static final String uri_getByID = "/getByID";
+		private static final String uri_getAllNoSoft = "/getAllNoSoft";
+		private static final String uri_getSum = "/getSum";
+		private static final String uri_update= "/update";
+		private static final String uri_insert = "/insert";
+		
 		
 	    private static final Logger logger = LoggerFactory.getLogger(DeviceController.class);
 	     
 
-	    @GetMapping("/getAll")
+	/*  Setting up all GET endpoint to access data from the Database 
+	 *  Here are the end-points creating for get request;
+	 * 
+	 * "/getAll"
+	 * "/getByID"
+	 * "/getAllNoSoft"
+	 * "/getSum"
+	 * 
+	 * 
+	 * */
+	    
+	    @GetMapping(uri_getAll)
 	    @ResponseStatus(value =  HttpStatus.OK)
 	    public List<LedgerTable> findAll() {
 	        var ledgerVal = (List<LedgerTable>) ledgerService.findAll();
 	        return ledgerVal;
 	    }
 	    
-	    @GetMapping("/getByID")
+	    @GetMapping(uri_getByID)
 	    @ResponseStatus(value =  HttpStatus.OK)
 	    public List<LedgerTable> findByID(
 	    		@RequestParam long id ) 
@@ -56,21 +74,30 @@ public class DeviceController {
 	        return ledgerVal;
 	    }
 	
-	    @GetMapping("/getAllNoSoft")
+	    @GetMapping(uri_getAllNoSoft)
 	    @ResponseStatus(value =  HttpStatus.OK)
 	    public List<LedgerTable> findAllWithNoSoftDelete() {
 	        var ledgerVal = (List<LedgerTable>) ledgerService.findTransactionNotSoftDeleted();
 	        return ledgerVal;
 	    }
 	    
-	    @GetMapping("/getSum")
+	    @GetMapping(uri_getSum)
 	    @ResponseStatus(value =  HttpStatus.OK)
 	    public double findSumWithNoSoftDelete() {
 	        var ledgerVal =  ledgerService.transSumNotSoftDeleted();
 	        return ledgerVal;
 	    }
 	    
-	    @PutMapping("/update")
+	    
+		/*  Setting up all PUT endpoint to update data record into the  Database 
+		 *   
+		 * 
+		 * "/update"
+		 * 
+		 * 
+		 * */	    
+	    
+	    @PutMapping(uri_update)
 	    @ResponseStatus(value =  HttpStatus.OK)
 	    public ResponseEntity<?> UpdateTrasaction(
 	    	@RequestBody LedgerTable updatedata,
@@ -84,7 +111,15 @@ public class DeviceController {
 	    }
 	    
 	    
-	    @PostMapping("/insert")
+		/*  Setting up all POST endpoint to insert data record into the  Database 
+		 *   
+		 * 
+		 * "/insert"
+		 * 
+		 * 
+		 * */
+	    
+	    @PostMapping(uri_insert)
 	    @ResponseStatus(HttpStatus.CREATED)
 	    public ResponseEntity<?> InsertTransaction(
 	    	@RequestBody LedgerTable updatedata) {
@@ -94,6 +129,15 @@ public class DeviceController {
 	    	}
 	    	else return ResponseEntity.ok("Error adding the record !!!");
 	    }
+	    
+	    
+		/*  Setting up all DELETE endpoint to update data record into the  Database 
+		 *   
+		 * 
+		 * "/delete"
+		 * 
+		 * 
+		 * */
 	    
 	    
 	    @DeleteMapping("/delete")

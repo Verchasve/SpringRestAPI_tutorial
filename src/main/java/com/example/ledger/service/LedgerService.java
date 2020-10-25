@@ -39,6 +39,7 @@ public class LedgerService implements LedgerDao {
 			+ "VALUE (? , ? , ? , ? )";
 	
   
+	/*  Service call to retrieve entire dataset from the Database */
 
 	@Override
 	public List<LedgerTable> findAll() {
@@ -47,6 +48,8 @@ public class LedgerService implements LedgerDao {
 		return data;
 	}
 
+	
+	/*  Service call to retrieve one dataset from the Database filter by ID */
 
 	@Override
 	public List<LedgerTable> findById(long id) {
@@ -56,6 +59,8 @@ public class LedgerService implements LedgerDao {
 	}
 
 
+	/*  Service call to update one column into Database filter by ID */
+	
 	@Override
 	public List<LedgerTable> findTransactionNotSoftDeleted() {
 		// TODO Auto-generated method stub
@@ -63,6 +68,8 @@ public class LedgerService implements LedgerDao {
 		return data;
 	}
 
+	
+	/*  Service call to get sum of transaction_values from all records, which has soft_delete as false in the databse */
 
 	@Override
 	public double transSumNotSoftDeleted() {
@@ -77,6 +84,8 @@ public class LedgerService implements LedgerDao {
 		return count;
 	}
 	
+	/*  Service call to update each column based on id into the databse */
+	
 	@Override
 	public boolean updatetransaction(long id , LedgerTable data ) {
 		// TODO Auto-generated method stub
@@ -90,6 +99,8 @@ public class LedgerService implements LedgerDao {
 		return false;
 	}
 	
+	/*  Service call to add new record into the databse */
+	
 	@Override
 	public boolean insertTransaction(LedgerTable data) {
 		// TODO Auto-generated method stub
@@ -102,6 +113,7 @@ public class LedgerService implements LedgerDao {
 		return false;
 	}
 
+	/*  Service call to update on column 'SOFT_DELETE' based on id into the databse */
 
 	@Override
 	public boolean updateSoftDelete(long id) {
@@ -115,6 +127,8 @@ public class LedgerService implements LedgerDao {
 		}
 		return false;
 	}
+	
+	
 
 	protected class LedgerMapper implements RowMapper<LedgerTable>
 	{
