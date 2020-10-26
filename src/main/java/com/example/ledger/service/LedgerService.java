@@ -54,7 +54,8 @@ public class LedgerService implements LedgerDao {
 	@Override
 	public List<LedgerTable> findById(long id) {
 		// TODO Auto-generated method stub
-		data = jdbctemplate.query(queryPredicate+" where LEDGER.ID = ?" , new Object[]{id}, new LedgerMapper()) ;
+		String qery = queryPredicate+" where LEDGER.ID = ?" ;
+		data = jdbctemplate.query(qery, new Object[]{id}, new LedgerMapper()) ;
 		return data;
 	}
 
@@ -64,18 +65,23 @@ public class LedgerService implements LedgerDao {
 	@Override
 	public List<LedgerTable> findTransactionNotSoftDeleted() {
 		// TODO Auto-generated method stub
-		data = jdbctemplate.query(queryPredicate+" where LEDGER.SOFT_DELETE IS FALSE", new LedgerMapper()) ; 
+		String qery = queryPredicate+" where LEDGER.SOFT_DELETE IS FALSE" ;
+		data = jdbctemplate.query(qery, new LedgerMapper()) ; 
 		return data;
 	}
 
 	
-	/*  Service call to get sum of transaction_values from all records, which has soft_delete as false in the databse */
+	/*  Service call to get sum of transaction_values from all records, 
+	 *  which has soft_delete set as false in the databse */
 
 	@Override
 	public double transSumNotSoftDeleted() {
 		// TODO Auto-generated method stub
 		List<Double> sum =  new ArrayList<>();
-		sum = jdbctemplate.queryForList("SELECT transaction_value FROM SYS.LEDGER where LEDGER.SOFT_DELETE IS FALSE", Double.class);
+		
+		String qery = "SELECT transaction_value FROM SYS.LEDGER where LEDGER.SOFT_DELETE IS FALSE" ;
+		sum = jdbctemplate.queryForList(qery, Double.class);
+		
 		double count = 0.0;
 		for (double i : sum)
 		{
@@ -90,8 +96,9 @@ public class LedgerService implements LedgerDao {
 	public boolean updatetransaction(long id , LedgerTable data ) {
 		// TODO Auto-generated method stub
 		int result = 0;
-		
-		result = jdbctemplate.update(UpdateQuery , data.getSender() , data.getRecipient() , data.getTransaction_value() , data.isSoft_delete() , id);
+		result = jdbctemplate.update(UpdateQuery , data.getSender() , 
+				data.getRecipient() , data.getTransaction_value() , 
+				data.isSoft_delete() , id);
 		if (result > 0 )
 		{
 			return true;
@@ -105,7 +112,10 @@ public class LedgerService implements LedgerDao {
 	public boolean insertTransaction(LedgerTable data) {
 		// TODO Auto-generated method stub
 		int result = 0;
-		result = jdbctemplate.update(InsertQuery , data.getSender() , data.getRecipient() , data.getTransaction_value() , data.isSoft_delete());
+		result = jdbctemplate.update(InsertQuery , data.getSender() 
+				, data.getRecipient() , data.getTransaction_value() 
+				, data.isSoft_delete());
+		
 		if (result > 0 )
 		{
 			return true;

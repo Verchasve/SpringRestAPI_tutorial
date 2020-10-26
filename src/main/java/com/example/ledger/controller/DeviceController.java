@@ -37,7 +37,7 @@ public class DeviceController {
 		@Autowired 
 	    private LedgerService ledgerService;
 		private static final String uri_getAll = "/getAll";
-		private static final String uri_getByID = "/getByID";
+		
 		private static final String uri_getAllNoSoft = "/getAllNoSoft";
 		private static final String uri_getSum = "/getSum";
 		private static final String uri_update= "/update";
@@ -46,7 +46,7 @@ public class DeviceController {
 		
 	    private static final Logger logger = LoggerFactory.getLogger(DeviceController.class);
 	     
-
+ 
 	/*  Setting up all GET endpoint to access data from the Database 
 	 *  Here are the end-points creating for get request;
 	 * 
@@ -64,6 +64,8 @@ public class DeviceController {
 	        var ledgerVal = (List<LedgerTable>) ledgerService.findAll();
 	        return ledgerVal;
 	    }
+	    
+	    private static final String uri_getByID = "/getByID";
 	    
 	    @GetMapping(uri_getByID)
 	    @ResponseStatus(value =  HttpStatus.OK)
@@ -89,13 +91,8 @@ public class DeviceController {
 	    }
 	    
 	    
-		/*  Setting up all PUT endpoint to update data record into the  Database 
-		 *   
-		 * 
-		 * "/update"
-		 * 
-		 * 
-		 * */	    
+		/*  Setting up all PUT endpoint "/update" to update data record 
+		 *  into the  Database  */	    
 	    
 	    @PutMapping(uri_update)
 	    @ResponseStatus(value =  HttpStatus.OK)
@@ -111,13 +108,7 @@ public class DeviceController {
 	    }
 	    
 	    
-		/*  Setting up all POST endpoint to insert data record into the  Database 
-		 *   
-		 * 
-		 * "/insert"
-		 * 
-		 * 
-		 * */
+		/*  Setting up all POST endpoint "/insert" to insert data record into the  Database   */
 	    
 	    @PostMapping(uri_insert)
 	    @ResponseStatus(HttpStatus.CREATED)
@@ -131,13 +122,8 @@ public class DeviceController {
 	    }
 	    
 	    
-		/*  Setting up all DELETE endpoint to update data record into the  Database 
-		 *   
-		 * 
-		 * "/delete"
-		 * 
-		 * 
-		 * */
+		/*  Setting up all DELETE endpoint "/delete" to update data record 
+		 * 	into the  Database */
 	    
 	    
 	    @DeleteMapping("/delete")
@@ -146,7 +132,7 @@ public class DeviceController {
 	    	@RequestParam long id) {
 	    	if (ledgerService.updateSoftDelete(id))
 	    	{
-		        return ResponseEntity.ok("Record is deleted !!!");
+		        return ResponseEntity.ok("Record is soft deleted !!!");
 	    	}
 	    	
 	    	else return ResponseEntity.ok("Error deleting the record!!!");
