@@ -5,7 +5,7 @@
 package com.example.ledger.controller;
 
  
-import java.util.List;
+import java.util.List; 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,30 +20,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.RestController; 
+import com.example.ledger.calamp.GPS_CALAMP_DATA_T;
+import com.example.ledger.dao.CalampRepository;
+import com.example.ledger.dao.LoadedRepo;
 import com.example.ledger.model.LedgerTable;
-import com.example.ledger.service.LedgerService;
+import com.example.ledger.model.LoadedMails;
+import com.example.ledger.model.TRIP_SUMMARY_T;
+import com.example.ledger.service.LedgerService; 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
+import springfox.documentation.annotations.ApiIgnore;
+import io.swagger.annotations.ApiResponse;
+ 
+ 
 
 
 @RestController
 @CrossOrigin
 @RequestMapping("/ledger")
-
+@Api(value = "ledgerproject " , description = "Demo for Rest controller methods " )
 public class DeviceController {
 	
 	
  	    
 		@Autowired 
 	    private LedgerService ledgerService;
-		private static final String uri_getAll = "/getAll";
 		
+		@Autowired 
+	    private CalampRepository calampService; 
+		
+		// @Autowired 
+	    // private LoadedRepo loadService; 
+		
+		private static final String uri_getAll = "/getAll"; 
 		private static final String uri_getAllNoSoft = "/getAllNoSoft";
 		private static final String uri_getSum = "/getSum";
 		private static final String uri_update= "/update";
-		private static final String uri_insert = "/insert";
-		
-		
+		private static final String uri_insert = "/insert"; 
 	    private static final Logger logger = LoggerFactory.getLogger(DeviceController.class);
 	     
  
@@ -58,11 +73,36 @@ public class DeviceController {
 	 * 
 	 * */
 	    
+	    
+	    @ApiOperation(value = "List of getting calamp devices" , response = GPS_CALAMP_DATA_T.class)
+	    @ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Successfully retrieved Calamp list"),
+	            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	    })
+	    @GetMapping("/getCalamp")
+	    @ResponseStatus(value =  HttpStatus.OK)
+	    public   List<GPS_CALAMP_DATA_T>  findCalamp(@RequestParam String deviceID) { 
+	        var ledgerVal =   calampService.findByID(deviceID);
+	        logger.info("result "  + ledgerVal );
+	        return ledgerVal; 
+	    }
+	    
+	    
+//	    @GetMapping("/getLoad")
+//	    @ResponseStatus(value =  HttpStatus.OK)
+//	    public  List<TRIP_SUMMARY_T>  findLoad(@RequestParam String work_date) { 
+//	        var loadVal =   loadService.getAllUnknwonTrailerS(work_date);
+//	        logger.info("result "  + loadVal );
+//	        return loadVal; 
+//	    }
+	    
 	    @GetMapping(uri_getAll)
 	    @ResponseStatus(value =  HttpStatus.OK)
-	    public List<LedgerTable> findAll() {
+	    public List<LedgerTable> findAll() { 
 	        var ledgerVal = (List<LedgerTable>) ledgerService.findAll();
-	        return ledgerVal;
+	        return ledgerVal; 
 	    }
 	    
 	    private static final String uri_getByID = "/getByID";
@@ -86,6 +126,7 @@ public class DeviceController {
 	    @GetMapping(uri_getSum)
 	    @ResponseStatus(value =  HttpStatus.OK)
 	    public double findSumWithNoSoftDelete() {
+	   
 	        var ledgerVal =  ledgerService.transSumNotSoftDeleted();
 	        return ledgerVal;
 	    }
@@ -124,8 +165,7 @@ public class DeviceController {
 	    
 		/*  Setting up all DELETE endpoint "/delete" to update data record 
 		 * 	into the  Database */
-	    
-	    
+	    @ApiIgnore
 	    @DeleteMapping("/delete")
 	    @ResponseStatus(value =  HttpStatus.OK)
 	    public ResponseEntity<?> DeleteTransaction(

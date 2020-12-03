@@ -1,0 +1,49 @@
+teta0_1, teta0_1.usps.gov =
+   (Description=
+      (address = (protocol = tcp)(host = eagnmnmed5dc)(port = 2022))
+        (Connect_data=(service_name = teta0_1.usps.gov))
+    )
+
+teta0_2, teta0_2.usps.gov =
+  (Description=
+      (address = (protocol = tcp)(host = eagnmnmed5dd)(port = 2022))
+        (Connect_data=(service_name = teta0_2.usps.gov))
+    )
+
+teta0,teta0.usps.gov =
+  (Description =
+    (Failover=ON)
+    (Address_List=
+      (Load_Balance=OFF)
+      (address = (protocol = tcp)(host = eagnmnmed5dc)(port = 2022))
+      (address = (protocol = tcp)(host = eagnmnmed5dd)(port = 2022))
+    )
+    (Connect_data=(service_name = teta0.usps.gov) )
+  )
+eta_adm = (Description =
+    (Failover=ON)
+    (Address_List=
+      (Load_Balance=OFF)
+      (address = (protocol = tcp)(host = eagnmnmed5dc)(port = 2022))
+      (address = (protocol = tcp)(host = eagnmnmed5dd)(port = 2022))
+    )
+    (Connect_data=(service_name = teta0.usps.gov) )
+  )
+agat_usr = (Description =
+    (Failover=ON)
+    (Address_List=
+      (Load_Balance=OFF)
+      (address = (protocol = tcp)(host = eagnmnmed5dc)(port = 2022))
+      (address = (protocol = tcp)(host = eagnmnmed5dd)(port = 2022))
+    )
+    (Connect_data=(service_name = teta0.usps.gov) )
+  )
+AGAT_ADM = (Description =
+    (Failover=ON)
+    (Address_List=
+      (Load_Balance=OFF)
+      (address = (protocol = tcp)(host = eagnmnmed5dc)(port = 2022))
+      (address = (protocol = tcp)(host = eagnmnmed5dd)(port = 2022))
+    )
+    (Connect_data=(service_name = teta0.usps.gov) )
+  )

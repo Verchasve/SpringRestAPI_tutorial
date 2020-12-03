@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 @Entity
 @Table(name = "ledger")
@@ -20,6 +22,8 @@ public class LedgerTable {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+	
+	@ApiModelProperty(notes = "Name of the Sender")
     private String sender;
     private String recipient;
     private boolean soft_delete;

@@ -21,5 +21,23 @@ public class Runner {
 	   //MethodReference.MethodReferenceRunner();
 	   // Streams.StreamsRunner(); 
 	  new Java11Feature().features1();
+	  
+	  String str = "asdasdas";
+	  
+	  
+	 //str.chars().distinct().forEach(c -> sb.append((char) c));
+	  
+	  System.out.println(str);
+	  
+	  
+	  StringBuilder sb = new StringBuilder();
+	  int idx;
+	  for (int i = 0; i < str.length(); i++) {
+	      char c = str.charAt(i);
+	      idx = str.indexOf(c, i + 1);
+	      if (idx == -1) {
+	          sb.append(c);
+	      }
+	  }
   }
 }

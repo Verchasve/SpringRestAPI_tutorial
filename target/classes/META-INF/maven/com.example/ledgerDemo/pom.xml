@@ -3,10 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+			<groupId>gov.usps</groupId>
+			<artifactId>usps-spring-parent</artifactId>
+			<version>2.1.3</version> 
 	</parent>
 	
 	<groupId>com.example</groupId>
@@ -17,9 +16,24 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<io.springfox.version>3.0.0</io.springfox.version>
+		<embedded-start-script>true</embedded-start-script>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
 
 	<dependencies>
+	
+	
+	<!--  Dependancy for automatic recompile code  -->
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 	
 		
 	<!--  Dependancy provide http access using embedded apache tomcat container -->
@@ -41,21 +55,41 @@
 			<scope>runtime</scope>
 		</dependency> 
 		
+		<dependency>
+  			<groupId>gov.usps</groupId>
+  			<artifactId>all-ucp-jdbc8</artifactId>
+  			<type>pom</type>
+		</dependency>
+		
 	<!--  Dependancy to access and persist data using Spring Data -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         
-        
+        <dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId> 
+		</dependency>
         
    <!--  Dependancy to add java annotation @Data library to remove boilerate code such as getter/setter methods. But we are not using this in our current project -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency> -->
-        
+		</dependency> 
+		
+		<dependency>
+    		<groupId>javax.validation</groupId>
+    		<artifactId>validation-api</artifactId> 
+		</dependency>
+		
+		  <!-- HikariCP connection pool -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId> 
+        </dependency>
+		
     <!--  Dependancy provide security authentication and access control framework But we won't be using in this project  -->
 	 	<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -90,6 +124,52 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+ 		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			 <version>${io.springfox.version}</version>
+		  </dependency>
+		<dependency>
+        	<groupId>io.springfox</groupId>
+        	<artifactId>springfox-boot-starter</artifactId>
+        	<version>${io.springfox.version}</version>
+    	</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			 <version>${io.springfox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-spring-web</artifactId>
+			 <version>${io.springfox.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-oas</artifactId>
+			 <version>${io.springfox.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.5.21</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>1.5.21</version>
+		</dependency>
+		
+		<dependency>
+        <groupId>org.springframework.plugin</groupId>
+        <artifactId>spring-plugin-core</artifactId>
+        <version>2.0.0.RELEASE</version>
+ </dependency>
 		 
 	</dependencies>
 

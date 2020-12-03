@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "spring.datasource.oracle.wallet-path",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.oracle.wallet-path'"
+  },
+  {
+    "name": "spring.datasource.oracle.network-admin-path",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.oracle.network-admin-path'"
+  }
+]}
