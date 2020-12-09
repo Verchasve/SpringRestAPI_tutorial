@@ -237,7 +237,54 @@ public class Sorting {
 	        } 
 	    } 
         
-	public static boolean uniqueCharacters(String str)
+	
+	 
+	    
+	 public static void main(String args[]) 
+	    {  
+//		 Sorting sort =  new Sorting();
+//		 // MERGESORT(arr , arr.length);
+//		 sort.BUBBLESORT(array);
+//		 sort.SELECTIONSORT(array);
+//		 sort.INSERTIONSORT(array);
+//		 sort.SHELLSORT(array);
+//		 sort. MERGESORT(array , array.length);
+//		 sort. HEAPSORT(array);
+		 String str = "RTF20001000Z";
+		// System.out.println(uniqueCharacters("ABCD")); 
+		// System.out.println(str.substring(3 , 7));
+		 String year = "RTF20001000Z";
+		 String year1 = "DRV19845000Y";
+		 String year2 = "5000";
+		// System.out.println(currencyCheck(year2));
+		 boolean isNumeric = year2.chars().allMatch( Character::isDigit );
+		// System.out.println(year2.toUpperCase().matches("[A-Z]+"));
+		 
+		// System.out.println("Sorted Array = "+Arrays.toString(array));
+		 
+		 List<Integer> ls =  new ArrayList<Integer>();
+		 ls.add(13);
+		 ls.add(10);
+		 ls.add(10);
+		 ls.add(21);
+		 ls.add(20); 
+		 ls.add(13);
+		 ls.add(10);
+		 ls.add(10);
+		 ls.add(21);
+		 ls.add(20);
+ 
+		 List<Integer> sortedLs =  ls.stream().sorted()
+				 .distinct().collect(Collectors.toList());
+		 sortedLs.forEach(value -> System.out.println(value));
+		 //sortedLs.forEach(System.out::println); 
+		
+ 
+	    } 
+ 
+
+	 
+	 public static boolean uniqueCharacters(String str)
 	    {
 	        // If at any time we encounter 2 same
 	        // characters, return false
@@ -283,7 +330,7 @@ public class Sorting {
 	
 	public static boolean currencyCheck(String text)
 	{ 
- 
+
 		  String[] ls = {"10" , "20" , "50" , "100" , "200" , "500" , "1000"};
 		  boolean check = false;
 		  
@@ -356,48 +403,5 @@ public class Sorting {
 		return count;
 	}
 	 
-	    
-	 public static void main(String args[]) 
-	    {  
-//		 Sorting sort =  new Sorting();
-//		 // MERGESORT(arr , arr.length);
-//		 sort.BUBBLESORT(array);
-//		 sort.SELECTIONSORT(array);
-//		 sort.INSERTIONSORT(array);
-//		 sort.SHELLSORT(array);
-//		 sort. MERGESORT(array , array.length);
-//		 sort. HEAPSORT(array);
-		 String str = "RTF20001000Z";
-		// System.out.println(uniqueCharacters("ABCD")); 
-		// System.out.println(str.substring(3 , 7));
-		 String year = "RTF20001000Z";
-		 String year1 = "DRV19845000Y";
-		 String year2 = "5000";
-		// System.out.println(currencyCheck(year2));
-		 boolean isNumeric = year2.chars().allMatch( Character::isDigit );
-		// System.out.println(year2.toUpperCase().matches("[A-Z]+"));
-		 
-		// System.out.println("Sorted Array = "+Arrays.toString(array));
-		 
-		 List<Integer> ls =  new ArrayList<Integer>();
-		 ls.add(13);
-		 ls.add(10);
-		 ls.add(10);
-		 ls.add(21);
-		 ls.add(20); 
-		 ls.add(13);
-		 ls.add(10);
-		 ls.add(10);
-		 ls.add(21);
-		 ls.add(20);
- 
-		 List<Integer> sortedLs =  ls.stream().sorted()
-				 .distinct().collect(Collectors.toList());
-		 sortedLs.forEach(value -> System.out.println(value));
-		 //sortedLs.forEach(System.out::println); 
-		
- 
-	    } 
- 
-
+	 
 }

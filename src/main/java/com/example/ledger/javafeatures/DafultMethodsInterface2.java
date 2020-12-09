@@ -8,7 +8,7 @@ package com.example.ledger.javafeatures;
  * @author DGS1Q0
  *
  */
-public interface DafultMethodsInterface2 {
+public interface DafultMethodsInterface2  {
  
 	 default void print() {
 	      System.out.println("I am a four DafultMethodsInterface2");

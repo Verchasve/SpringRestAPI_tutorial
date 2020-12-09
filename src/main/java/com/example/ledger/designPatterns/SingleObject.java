@@ -18,7 +18,7 @@ package com.example.ledger.designPatterns;
 public class SingleObject {
 	
 	//create an object of SingleObject
-	private static SingleObject instance = new SingleObject();
+	private volatile  static SingleObject instance ;
 	
 	   //make the constructor private so that this class cannot be
 	   //instantiated
